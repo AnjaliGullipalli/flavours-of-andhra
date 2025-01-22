@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Flavours of Andhra</title>
+    <style>
+        /* CSS styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .restaurant-header {
+            background-color: #854a46;
+            color: rgb(234, 175, 12);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .restaurant-header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .restaurant-nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .restaurant-nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .restaurant-nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        #cart {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .restaurant-main {
+            padding: 20px;
+        }
+
+        .restaurant-footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #854a46;
+            color: white;
+        }
+
+        .recipe-category {
+            display: none;
+            /* Initially hide all recipe categories */
+        }
+
+        .recipe {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            width: calc(25% - 20px);
+            /* Adjust width as needed */
+            vertical-align: top;
+        }
+
+        .recipe img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .recipe h3 {
+            margin-top: 5px;
+            font-size: 1.2em;
+        }
+
+        .recipe p {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="restaurant-header">
+        <div class="container">
+            <h1>Welcome to Flavours of Andhra</h1>
+        </div>
+    </header>
+
+    <nav class="restaurant-nav">
+        <div class="container">
+            <a href="#veg">Vegetarian</a>
+            <a href="#nonveg">Non-Vegetarian</a>
+            <a href="#sweets">Sweets</a>
+            <a href="#drinks">Drinks</a>
+            <a href="#Pickels">Pickels</a>
+            <a href="#Today's Special">Today's Special</a>
+            <a href="#snacks">Snacks</a>
+            <a href="#Tiffins">tiffins</a>
+        </div>
+    </nav>
+
+    <main class="restaurant-main" id="mainPart">
+        <!-- Vegetarian Recipes -->
+        <section class="recipe-category" id="veg">
+            <div class="container">
+                <h2>Vegetarian Recipes</h2>
+                <div class="recipe">
+                    <img src="/static/kaju mulakkada.jpg" alt="Vegetarian Recipe 1">
+                    <h3>kaju Mulakkada</h3>
+                    <p></p>
+                    <button onclick="addToCart('kaju mulakkada', 8.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/Gutti Vankaya.jpg" alt="Vegetarian Recipe 2">
+                    <h3>Gutti Vankaya</h3>
+                    <p></p>
+                    <button onclick="addToCart('Gutti Vankaya', 8.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/dhondakai kobbari.jpg" alt="Vegetarian Recipe 1">
+                    <h3>Dhondakai Kobbari</h3>
+                    <p></p>
+                    <button onclick="addToCart('dhondakai kobbari', 8.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/tomato pappu.jpg" alt="Vegetarian Recipe 1">
+                    <h3>Tomato Pappu</h3>
+                    <p></p>
+                    <button onclick="addToCart('tomato pappu', 8.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/dappalam.jpg" alt="Vegetarian Recipe 1">
+                    <h3>Dappalam Pulusu</h3>
+                    <p></p>
+                    <button onclick="addToCart('dappalam', 8.99)">Add to Cart</button>
+                </div>
+                <!-- Add more vegetarian recipes as needed -->
+            </div>
+        </section>
+
+        <!-- Non-Vegetarian Recipes -->
+        <section class="recipe-category" id="nonveg">
+            <div class="container">
+                <h2>Non-Vegetarian Recipes</h2>
+                <div class="recipe">
+                    <img src="/static/chittimuthyala biryani.jpg" alt="Non-Vegetarian Recipe 1">
+                    <h3>Chittimuthyala Biryani</h3>
+                    <p></p>
+                    <button onclick="addToCart('Chittimuthyala Biryani', 10.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/boti gongura.jpg" alt="Non-Vegetarian Recipe 1">
+                    <h3>Boti Gongura</h3>
+                    <p></p>
+                    <button onclick="addToCart('boti gongura', 10.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/gongura royyalu.jpg" alt="Non-Vegetarian Recipe 1">
+                    <h3>Gongura Royyalu</h3>
+                    <p></p>
+                    <button onclick="addToCart('gongura royyalu', 10.99)">Add to Cart</button>
+                </div>
+
+                <div class="recipe">
+                    <img src="/static/peethala eguru.jpg" alt="Non-Vegetarian Recipe 2">
+                    <h3>Peethala Eguru</h3>
+                    <p></p>
+                    <button onclick="addToCart('Peethala Eguru', 12.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/Chepala Pulusu.jpg" alt="Non-Vegetarian Recipe 2">
+                    <h3>Chepala Pulusu</h3>
+                    <p></p>
+                    <button onclick="addToCart('Chepala Pulusu', 12.99)">Add to Cart</button>
+                </div>
+                <!-- Add more non-vegetarian recipes as needed -->
+            </div>
+        </section>
+
+        <!-- Sweets Recipes -->
+        <section class="recipe-category" id="sweets">
+            <div class="container">
+                <h2>Sweets Recipes</h2>
+                <div class="recipe">
+                    <img src="/static/Ariselu.jpg" alt="Sweets Recipe 1">
+                    <h3>Ariselu</h3>
+                    <p></p>
+                    <button onclick="addToCart('Ariselu', 6.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/Pootharekulu.jpg" alt="Sweets Recipe 2">
+                    <h3>Pootharekulu</h3>
+                    <p></p>
+                    <button onclick="addToCart('Pootharekulu', 7.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/Sunnundalu.jpg" alt="Sweets Recipe 1">
+                    <h3>Sunnundalu</h3>
+                    <p></p>
+                    <button onclick="addToCart('Sunnundalu', 6.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/Bobbatlu.jpg" alt="Sweets Recipe 1">
+                    <h3>Bobbatlu</h3>
+                    <p></p>
+                    <button onclick="addToCart('babbatlu', 6.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/madatha kaja.jpg" alt="Sweets Recipe 1">
+                    <h3>Madatha Kaja</h3>
+                    <p></p>
+                    <button onclick="addToCart('madatha kaja', 6.99)">Add to Cart</button>
+                </div>
+
+                <!-- Add more sweets recipes as needed -->
+            </div>
+        </section>
+
+        <!-- Drinks Recipes -->
+        <section class="recipe-category" id="drinks">
+            <div class="container">
+                <h2>Drinks Recipes</h2>
+                <div class="recipe">
+                    <img src="/static/Nannari Sherbet.jpg" alt="Drinks Recipe 1">
+                    <h3>Nannari Sherbet</h3>
+                    <p></p>
+                    <button onclick="addToCart('Nannari Sherbet', 4.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/rose milk.jpg" alt="Drinks Recipe 2">
+                    <h3>Rosemilk</h3>
+                    <p></p>
+                    <button onclick="addToCart('rose milk', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/nimma soda.jpg" alt="Drinks Recipe 2">
+                    <h3>Nimma soda</h3>
+                    <p></p>
+                    <button onclick="addToCart('nimma soda', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/panakam.jpg" alt="Drinks Recipe 2">
+                    <h3>Panakam</h3>
+                    <p></p>
+                    <button onclick="addToCart('panakam', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/badam milk.jpg" alt="Drinks Recipe 2">
+                    <h3>Badammilk</h3>
+                    <p></p>
+                    <button onclick="addToCart('badam milk', 3.99)">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+        <!-- Add more drinks recipes as needed -->
+
+        <!-- pickels Recipes -->
+        <section class="recipe-category" id="Pickels">
+            <div class="container">
+                <h2>pickels Recipes</h2>
+                <div class="recipe">
+                    <img src="/static/avakaya.jpg" alt="Drinks Recipe 1">
+                    <h3>Avakaya</h3>
+                    <p></p>
+                    <button onclick="addToCart('avakaya', 4.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/usirikai pachhadi.jpg" alt="Drinks Recipe 2">
+                    <h3>Usirikai Pachhadi</h3>
+                    <p></p>
+                    <button onclick="addToCart('usirikai pachhadi', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/dosavakaya.jpg" alt="Drinks Recipe 2">
+                    <h3>Dosavakaya</h3>
+                    <p></p>
+                    <button onclick="addToCart('dosavakaya', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/magaya.jpg" alt="Drinks Recipe 2">
+                    <h3>Magaya</h3>
+                    <p></p>
+                    <button onclick="addToCart('magaya', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/allam pachhadi.jpg" alt="Drinks Recipe 2">
+                    <h3>Allam Pachhadi</h3>
+                    <p></p>
+                    <button onclick="addToCart('allam pachhadi', 3.99)">Add to Cart</button>
+                </div>
+                <!-- Add more sweets recipes as needed -->
+            </div>
+        </section>
+
+        <!-- Today's Special Recipes -->
+        <section class="recipe-category" id="Today's Special">
+            <div class="container">
+                <h2>Today's Special Recipes</h2>
+                <div class="recipe">
+                    <img src="/static/pulihora.jpg" alt="Drinks Recipe 1">
+                    <h3>Pulihora</h3>
+                    <p></p>
+                    <button onclick="addToCart('pulihora', 4.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/chakkerapongali.jpg" alt="Drinks Recipe 2">
+                    <h3>Chakkarapongali</h3>
+                    <p></p>
+                    <button onclick="addToCart('chakkerapongali', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/ragi sangati.jpg" alt="Drinks Recipe 2">
+                    <h3>Ragi Sangati</h3>
+                    <p></p>
+                    <button onclick="addToCart('ragi sangati', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/ulavacharu rice.jpg" alt="Drinks Recipe 2">
+                    <h3>Ulavacharu Rice</h3>
+                    <p></p>
+                    <button onclick="addToCart('ulavacharu rice', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/gongura pachadi.jpg" alt="Drinks Recipe 2">
+                    <h3>Gongura Pachhadi</h3>
+                    <p></p>
+                    <button onclick="addToCart('gongura pachadi', 3.99)">Add to Cart</button>
+                </div>
+
+            </div>
+        </section>
+        <!-- Snacks Recipes -->
+        <section class="recipe-category" id="snacks">
+            <div class="container">
+                <h2>Snacks Recipes</h2>
+                <div class="recipe">
+                    <img src="/static/punugulu.jpg" alt="Drinks Recipe 1">
+                    <h3>Punugulu</h3>
+                    <p></p>
+                    <button onclick="addToCart('punugulu', 4.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/mirchi bajji.jpg" alt="Drinks Recipe 2">
+                    <h3>Mirchi Bajji</h3>
+                    <p></p>
+                    <button onclick="addToCart('mirchi bajji', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/muntha masala.jpg" alt="Drinks Recipe 2">
+                    <h3>Muntha Masala</h3>
+                    <p></p>
+                    <button onclick="addToCart('muntha masala', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/bobbari garelu.jpg" alt="Drinks Recipe 2">
+                    <h3>Bobbari Garelu</h3>
+                    <p></p>
+                    <button onclick="addToCart('bobbari garelu', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/onion pakodi.jpg" alt="Drinks Recipe 2">
+                    <h3>Onion Pakodi</h3>
+                    <p></p>
+                    <button onclick="addToCart('onion pakodi', 3.99)">Add to Cart</button>
+                </div>
+
+            </div>
+        </section>
+        <!-- Tiffins Recipes -->
+        <section class="recipe-category" id="Tiffins">
+            <div class="container">
+                <h2>Tiffins Recipes</h2>
+                <div class="recipe">
+                    <img src="/static/pesarattu upma.jpg" alt="Drinks Recipe 1">
+                    <h3>Pesarattu Upma</h3>
+                    <p></p>
+                    <button onclick="addToCart('pesarattu upma', 4.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/ravva dosa.jpg" alt="Drinks Recipe 2">
+                    <h3>Ravva Dosa</h3>
+                    <p></p>
+                    <button onclick="addToCart('ravva dosa', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/dhibbarotti with panakam.jpg" alt="Drinks Recipe 2">
+                    <h3>Dhibbarotti</h3>
+                    <p></p>
+                    <button onclick="addToCart('dhibbarotti', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/avada perugu.jpg" alt="Drinks Recipe 2">
+                    <h3>Avada Perugu</h3>
+                    <p></p>
+                    <button onclick="addToCart('avada perugu', 3.99)">Add to Cart</button>
+                </div>
+                <div class="recipe">
+                    <img src="/static/chitti idli.jpg" alt="Drinks Recipe 2">
+                    <h3>Chiiti Idli </h3>
+                    <p></p>
+                    <button onclick="addToCart('chiiti idli with karam podi', 3.99)">Add to Cart</button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Section -->
+    <div id="cart">
+        <h3>Your Cart</h3>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <button onclick="viewCart()">view cart</button>
+    </div>
+
+    <footer class="restaurant-footer">
+        <div class="container">
+            <p>&copy; 2024 Flavours of Andhra. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript to show/hide recipe categories based on navigation clicks -->
+    <script>
+        // Get all recipe categories
+        var recipeCategories = document.querySelectorAll('.recipe-category');
+
+        // Function to show selected category and hide others
+        function showRecipeCategory(categoryId) {
+            recipeCategories.forEach(function (category) {
+                if (category.id === categoryId) {
+                    category.style.display = 'block';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        }
+
+        // Add click event listeners to navigation links
+        document.querySelectorAll('.restaurant-nav a').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+                var targetId = link.getAttribute('href').substring(1); // Get target section ID
+                showRecipeCategory(targetId); // Show selected recipe category
+            });
+        });
+
+        // Cart functionality
+        let cartItems = [];
+        let total = 0;
+
+        function addToCart(itemName, price) {
+            axios.post('/add_to_cart',{
+                item_name:itemName,
+                quantity:1
+            }).then((res)=>{
+                alert(res.data.message);
+            });
+            cartItems.push({ name: itemName, price: price });
+            total += price;
+            // Update the cart display
+            updateCartDisplay();
+        }
+            // Update the cart display
+            function updateCartDisplay() {
+                const cartItemsList = document.getElementById('cart-items');
+                const cartTotal = document.getElementById('cart-total');
+
+                // Clear the existing cart items
+                cartItemsList.innerHTML = '';
+
+                // Add each item in the cart to the list
+                cartItems.forEach(function (item) {
+                    const li = document.createElement('li');
+                    li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                    cartItemsList.appendChild(li);
+                });
+
+                // Update the total price
+                cartTotal.textContent = total.toFixed(2);
+            }
+
+            // Show the first category by default
+            if (recipeCategories.length > 0) {
+                showRecipeCategory(recipeCategories[0].id);
+            }
+
+
+
+
+        </script>
+    </body>
+
+    </html>
+
+</body>
+
+</html>

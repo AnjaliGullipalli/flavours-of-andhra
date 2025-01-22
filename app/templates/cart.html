@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Flavours of Andhra</title>
+    <style>
+        /* CSS styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .restaurant-header {
+            background-color: #854a46;
+            color: rgb(234, 175, 12);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .restaurant-header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .restaurant-nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .restaurant-nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .restaurant-nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        #cart {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #cart h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #854a46;
+        }
+
+        #cart-items {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #cart-items li {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #cart-items li:last-child {
+            border-bottom: none;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-actions {
+            flex-shrink: 0;
+        }
+
+        .item-name {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .item-price {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-label {
+            margin-right: 5px;
+        }
+
+        .quantity-buttons button {
+            background-color: #ddd;
+            color: #333;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-buttons button:hover {
+            background-color: #ccc;
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        .checkout-section {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .checkout-section button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkout-section button:hover {
+            background-color: #45a049;
+        }
+
+        .restaurant-main {
+            padding: 20px;
+        }
+
+        .restaurant-footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #854a46;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .order-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .order-popup button {
+            margin-top: 10px;
+            margin-right: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-popup button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="restaurant-header">
+        <div class="container">
+            <h1>Welcome to Flavours of Andhra</h1>
+        </div>
+    </header>
+
+    <nav class="restaurant-nav">
+        <div class="container">
+            <a href="#">Your Cart</a>
+
+            <a href="/dashboard"> <-back</a>
+        </div>
+    </nav>
+    <main class="restaurant-main container">
+        <div id="cart">
+            <h3>Your Cart</h3>
+            <ul id="cart-items"></ul>
+            <div class="checkout-section">
+                <p>Total: $<span id="cart-total">0.00</span></p>
+                <button onclick="submitOrder()">Submit Order</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="restaurant-footer">
+        <div class="container">
+            <p>&copy; 2024 Flavours of Andhra. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Order Confirmation Popup -->
+    <div class="popup-overlay" id="popup-overlay"></div>
+    <div class="order-popup" id="order-popup">
+        <h3>Confirm Your Order</h3>
+        <p id="order-details"></p>
+        <button onclick="confirmOrder()">OK</button>
+        <button onclick="closePopup()">Cancel</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            checkCartItems(); // Load cart items when the page loads
+        });
+
+        let cartItems = [];
+        let total = 0;
+
+        function checkCartItems() {
+            axios.get('/view_cart')
+                .then(function (response) {
+                    cartItems = response.data.items;
+                    total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                    updateCartDisplay();
+                })
+                .catch(function (error) {
+                    console.error('Error fetching cart items:', error);
+                });
+        }
+
+        function updateCartDisplay() {
+            const cartItemsList = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+
+            // Clear the existing cart items
+            cartItemsList.innerHTML = '';
+
+            // Add each item in the cart to the list
+            cartItems.forEach(function (item) {
+                const li = document.createElement('li');
+                li.classList.add('cart-item');
+                li.innerHTML = `
+                    <div class="item-details">
+                        <span class="item-name">${item.item_name}</span>
+                        <span class="item-price">$${(item.price / item.quantity).toFixed(2)}</span>
+                    </div>
+                    <div class="item-quantity">
+                        <span class="quantity-label">Quantity:</span>
+                        <div class="quantity-buttons">
+                            <button onclick="updateQuantity(${item.id}, ${item.quantity}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, ${item.quantity}, 1)">+</button>
+                        </div>
+                        <button class="delete-button" onclick="removeFromCart(${item.id})">Delete</button>
+                    </div>
+                `;
+                cartItemsList.appendChild(li);
+            });
+
+            // Update the total price
+            cartTotal.textContent = total.toFixed(2);
+        }
+
+        function updateQuantity(cartId, currentQuantity, change) {
+            const newQuantity = currentQuantity + change;
+
+            if (newQuantity <= 0) {
+                removeFromCart(cartId);
+            } else {
+                axios.post('/update_cart', {
+                    cart_id: cartId,
+                    quantity: newQuantity
+                }).then((res) => {
+                    alert(res.data.message);
+                    checkCartItems(); // Refresh cart items from backend
+                }).catch((error) => {
+                    console.error('Error updating cart item:', error);
+                });
+            }
+        }
+
+        function removeFromCart(cartId) {
+            axios.post('/delete_cart', {
+                cart_id: cartId
+            }).then((res) => {
+                alert(res.data.message);
+                checkCartItems(); // Refresh cart items from backend
+            }).catch((error) => {
+                console.error('Error removing cart item:', error);
+            });
+        }
+
+        function submitOrder() {
+            // Display the order details in the popup
+            const orderDetails = document.getElementById('order-details');
+            orderDetails.innerHTML = cartItems.map(item => `${item.item_name} x ${item.quantity}`).join('<br>') +
+                `<br><br>Total: $${total.toFixed(2)}`;
+            document.getElementById('popup-overlay').style.display = 'block';
+            document.getElementById('order-popup').style.display = 'block';
+        }
+
+        function confirmOrder() {
+            axios.post('/submit_order', { items: cartItems })
+                .then((res) => {
+                    alert(res.data.message);
+                    clearCart();
+                    closePopup();
+                    if (res.data.message === 'done') {
+                        window.location.href = '/dashboard';
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error submitting order:', error);
+                });
+        }
+
+        function clearCart() {
+            cartItems = [];
+            total = 0;
+            updateCartDisplay();
+        }
+
+        function closePopup() {
+            document.getElementById('popup-overlay').style.display = 'none';
+            document.getElementById('order-popup').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

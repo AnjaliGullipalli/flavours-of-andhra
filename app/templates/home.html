@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Flavours of Andhra</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+MX&display=swap" rel="stylesheet">
+    <style>
+       .header {
+            height: 60px;
+            background-color: #973131;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-family: "Playwrite MX", cursive;
+        }
+
+        .navbar {
+            height: 60px;
+            background-color: #973131;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 50px;
+            width: 100px;
+        }
+
+        .logo {
+            background-image: url(Python/images/cooking_banner.jpg);
+            background-size: cover;
+            height: 50px;
+            width: 100%;
+        }
+
+        .nav-middle {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            margin: 0 15px;
+            cursor: pointer;
+        }
+
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .add-icon {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .add-first {
+            color: #CCCCCC;
+            font-size: 0.85rem;
+        }
+
+        .add-second {
+            font-size: 1rem;
+            margin-left: 5px;
+        }
+
+        .nav-cart {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-cart i {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .hero-section {
+            background-image: url('/app/static/cooking-banner-7166200_1280.jpg');
+            background-size: cover;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .hero-msg {
+            background-color: transparent;
+            color: black;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.55rem;
+            width: 80%;
+        }
+        .hero-msg a {
+            color: #F5E7B2;
+        }
+        .shop-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            background-color: #e2e7e6;
+        }
+        .box {
+            height: 400px;
+            width: 23%;
+            background-color: white;
+            padding: 20px 0px 15px;
+            margin-top: 15px;
+        }
+        .box-image {
+            height: 300px;
+            background-size: cover;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        .box-content {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+        .box-content p {
+            color: #007185;
+        }
+        footer {
+            margin-top: 15px;
+        }
+        .foot-panel1 {
+            background-color: #973131;
+            color: white;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+        .foot-panel2 {
+            background-color: #F5E7B2;
+            color: white;
+            height: 400px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+        ul {
+            margin-top: 20px;
+        }
+        ul a {
+            display: block;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            color: #dddddd;
+        }
+        .foot-panel3 {
+            background-color: #973131;
+            color: white;
+            border-top: 0.5px solid white;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo {
+            background-image: url('/Accenture.svg');
+            background-size: cover;
+            height: 50px;
+            width: 200px;
+        }
+        .foot-panel4 {
+            background-color: #0F1111;
+            color: white;
+            height: 80px;
+        }
+        .pages {
+            font-size: 0.85rem;
+            padding-top: 25px;
+            text-align: center;
+        }
+        .copyright {
+            font-size: 0.85rem;
+            padding-top: 5px;
+            text-align: center;
+        }
+        .image-container {
+            width: 100%; /* Sets the reference width */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Flavours of Andhra
+    </div>
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="nav-logo">
+            </div>
+        </div>
+
+        <div class="nav-middle">
+            <div class="nav-item"><a href="#">Home</a></div>
+            <div class="nav-item"><a href="#">Explore</a></div>
+            <div class="nav-item"><a href="#">Orders</a></div>
+            <div class="nav-item"><a href="/registration">sign up</a></div>
+            <div class="nav-item"><a href="/login">login</a></div>
+        </div>
+
+        <div class="nav-right">
+            <div class="add-icon">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <div class="add-first">Delivery to</div>
+                    <div class="add-second">Andhra</div>
+                </div>
+            </div>
+            <div class="nav-cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Cart</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section box-image w-full" style="background-image: url('/app/static/cooking-banner-7166200_1280.jpg');">
+        <div class="hero-msg">
+            <p>you are on WelcomeToFlavoursOfAndhra.com.</p>
+        </div>
+    </div>
+    <div class="shop-section">
+        <div class="box">
+            <div class="box-content">
+                <h2>Snacks</h2>
+                <div class="box-image w-full h-auto" style="background-image: url(../images/box3.jpg);"></div>
+                <p>see more</p>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-content">
+                <h2>Desserts</h2>
+                <div class="box-image" style="background-image: url(../images/box4.jpg);"></div>
+                <p>see more</p>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-content">
+                <h2>Main Course</h2>
+                <div class="box-image" style="background-image: url(../images/box5.jpg);"></div>
+                <p>see more</p>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-content">
+                <h2>Desserts</h2>
+                <div class="box-image" style="background-image: url(../images/box6.jpg);"></div>
+                <p>see more</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="foot-panel1">
+            <p>Take Flavours of Andhra cuisine to your doorsteps</p>
+        </div>
+        <div class="foot-panel2">
+            <div class="pages">
+                <ul>
+                    <li><a href="#">about</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">privace policy</a></li>
+                    <li><a href="#">Cookies</a></li>
+                    <li><a href="#">Interest based adds</a></li>
+                </ul>
+            </div>
+            <div class="image-container">
+                <ul>
+                    <li><a href="#"><i class="fa-solid fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa-solid fa-linkedin-in"></i></a></li>
+                    <li><a href="#"><i class="fa-solid fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fa-solid fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa-solid fa-youtube"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="foot-panel3">
+            <p>Registered office: co address</p>
+        </div>
+        <div class="foot-panel4">
+            <p>&copy 2024-2025 welcome to the flavors of Andhra.com. all rights reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

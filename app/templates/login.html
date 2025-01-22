@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+      <title> Login Form</title>
+      <link rel="icon" type="image/jpeg" href="https://res.cloudinary.com/dvzei06gf/image/upload/v1718952910/bixtncqifha6zxjgzeep.jpg">
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <style>
+        body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: caveat;
+    min-height: 100vh;
+    background: url('../static/cooking-banner-7166200_1280.jpg');
+    background-size:cover;
+    margin: 0;
+}
+
+.main {
+
+    background-color:#e0e9e5 ;
+  border-radius: 15px;
+  padding: 10px 20px;
+  transition: transform 0.4s;
+  width: 500px;
+    text-align: center;
+}
+
+h1 {
+    color: rgb(212, 143, 22);
+}
+
+label {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #021307e1;
+    font-weight: bold;
+}
+
+
+input {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    background-color: #077a0f;
+    width: 100%;
+    font-size: 16px;
+}
+      </style>
+    </head>
+
+<body>
+
+      <div class="main">
+            <h1 id="heading">Welcome to flavours of Andhra</h1>
+            <h3>Enter your login details</h3>
+
+                  <label for="first">Username:</label>
+                  <input type="text"
+                         id="username"
+                         name="first"
+                         placeholder="Enter your Username" required>
+
+                  <label for="password"> Password: </label>
+                  <input type="password"
+                         id="password"
+                         name="password"
+                         placeholder="Enter your Password" required>
+
+                  <div class="wrap">
+                        <button type="submit" id="btn123"  onclick="submit()" >
+                              Submit
+                        </button>
+                  </div>
+            </form>
+            <p>Not registered?
+                  <a href="/login"
+                     style="text-decoration: none;">
+                        Create an account
+                  </a>
+            </p>
+      </div>
+
+      <script>
+        function submit(){
+          const username=document.getElementById('username').value;
+          console.log(username);
+          const password=document.getElementById('password').value;
+          console.log(password);
+
+          axios.post('/submitHandle',{
+            'username':username,
+            'password':password}).then(function (respoance){
+            console.log(respoance.data);
+            if(respoance.data.status === 'success'){
+                  window.location.href='/dashboard';
+            }else{
+                  alert('account not found');
+            }
+          }).catch(function(e){
+            console.log(e);
+          })
+        }
+
+      </script>
+</body>
+
+</html>
